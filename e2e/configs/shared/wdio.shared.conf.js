@@ -32,19 +32,16 @@ exports.config = {
   // Specify Test Files
   // ==================
   specs: [
-    './e2e/specs/**/*.spec.js',
+    './e2e/specs/all/*.spec.js',
   ],
 
   // ==================
   // Specify Suites
   // ==================
   suites: {
-    all: [
-      './e2e/specs/all/*.spec.js',
-    ],
     optimized: [
       './e2e/specs/optimized/login.spec.js',
-      // './e2e/specs/optimized/redirect.spec.js',
+      './e2e/specs/optimized/redirect.spec.js',
     ],
   },
 

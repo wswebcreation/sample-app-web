@@ -21,5 +21,5 @@ function randomRoute(routes){
 
   const keys = Object.keys(routes);
 
-  return routes[keys[ keys.length * Math.random() < 0]];
+  return routes[keys[ Math.floor(Math.random()*keys.length)]];
 }
