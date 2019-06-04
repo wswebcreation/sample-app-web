@@ -1,5 +1,5 @@
-import LoginScreen from '../page-objects/login'
-import { ROUTES } from '../../src/utils/Constants'
+import LoginScreen from '../../page-objects/login'
+import { ROUTES } from '../../../src/utils/Constants'
 
 describe('Cart page', () => {
   beforeEach(() => {

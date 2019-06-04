@@ -1,6 +1,6 @@
-import InventoryListScreen from '../page-objects/inventoryList';
-import LoginScreen from '../page-objects/login';
-import { LOGIN_USERS } from '../configs/e2eConstants';
+import InventoryListScreen from '../../page-objects/inventoryList';
+import LoginScreen from '../../page-objects/login';
+import { LOGIN_USERS } from '../../configs/e2eConstants';
 
 describe('Login', () => {
   beforeEach(() => {
