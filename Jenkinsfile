@@ -3,12 +3,6 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-          steps {
-            checkout scm
-          }
-        }
-
         stage('Install dependencies') {
             steps {
                 sh "npm install"
@@ -18,6 +12,18 @@ pipeline {
         stage('Run Unit Tests with coverage') {
             steps {
                 sh "npm test"
+            }
+            post {
+              always {
+                publishHTML target: [
+                  allowMissing         : false,
+                  alwaysLinkToLastBuild: false,
+                  keepAll             : true,
+                  reportDir            : '.coverage/lcov-report',
+                  reportFiles          : 'index.html',
+                  reportName           : 'Code Coverage Report'
+                ]
+              }
             }
         }
 
@@ -35,25 +41,6 @@ pipeline {
                     sh "npm run test.e2e.sauce.chrome ${env.CLI_ARGS}"
                   }
                   step([$class: 'SauceOnDemandTestPublisher'])
-                }
-              }
-            }
-        }
-
-        stage('Collect Results') {
-            steps {
-              step([$class: 'SauceOnDemandTestPublisher'])
-
-              post {
-                always {
-                  publishHTML target: [
-                    allowMissing         : false,
-                    alwaysLinkToLastBuild: false,
-                    keepAll             : true,
-                    reportDir            : '.coverage/lcov-report',
-                    reportFiles          : 'index.html',
-                    reportName           : 'Code Coverage Report'
-                  ]
                 }
               }
             }
