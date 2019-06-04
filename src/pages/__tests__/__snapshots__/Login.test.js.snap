@@ -29,6 +29,7 @@ exports[`Login should render correctly 1`] = `
       >
         <WithStyles(Grid)
           className="Login-contentWrapper-6"
+          id="login_button_container"
           item={true}
           sm={6}
           xs={12}

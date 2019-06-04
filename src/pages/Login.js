@@ -157,7 +157,7 @@ class Login extends Component {
 
             <Grid container className={ classes.wrapper }>
 
-              <Grid item xs={ 12 } sm={ 6 } className={ classes.contentWrapper }>
+              <Grid id="login_button_container" item xs={ 12 } sm={ 6 } className={ classes.contentWrapper }>
                 <form onSubmit={ this.handleSubmit }>
                   <InputError
                     className="form_input"
