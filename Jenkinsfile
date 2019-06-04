@@ -34,24 +34,27 @@ pipeline {
                   wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'xterm']) {
                     sh "npm run test.e2e.sauce.chrome ${env.CLI_ARGS}"
                   }
+                  step([$class: 'SauceOnDemandTestPublisher'])
                 }
               }
             }
         }
 
         stage('Collect Results') {
-            step([$class: 'SauceOnDemandTestPublisher'])
+            steps {
+              step([$class: 'SauceOnDemandTestPublisher'])
 
-            post {
-              always {
-                publishHTML target: [
-                  allowMissing         : false,
-                  alwaysLinkToLastBuild: false,
-                  keepAll             : true,
-                  reportDir            : '.coverage/lcov-report',
-                  reportFiles          : 'index.html',
-                  reportName           : 'Code Coverage Report'
-                ]
+              post {
+                always {
+                  publishHTML target: [
+                    allowMissing         : false,
+                    alwaysLinkToLastBuild: false,
+                    keepAll             : true,
+                    reportDir            : '.coverage/lcov-report',
+                    reportFiles          : 'index.html',
+                    reportName           : 'Code Coverage Report'
+                  ]
+                }
               }
             }
         }
