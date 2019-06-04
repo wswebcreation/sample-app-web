@@ -22,7 +22,7 @@ pipeline {
               sauce('SAUCE_ACCESS_KEY_EU') {
                 sauceconnect(options: '', sauceConnectPath: '', useGeneratedTunnelIdentifier: true, useLatestSauceConnect: true) {
                   wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'xterm']) {
-                    sh "npm run test.e2e.sauce.chrome"
+                    sh "npm run test.e2e.sauce.chrome ${env.CLI_ARGS}"
                   }
                   step([$class: 'SauceOnDemandTestPublisher'])
                 }
