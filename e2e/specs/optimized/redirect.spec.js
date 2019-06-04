@@ -1,5 +1,5 @@
-import LoginScreen from '../../page-objects/login'
-import { ROUTES } from '../../../src/utils/Constants'
+import LoginScreen from '../../page-objects/login';
+import { ROUTES } from '../../../src/utils/Constants';
 
 describe('Redirects', () => {
   beforeEach(() => {
@@ -21,5 +21,5 @@ function randomRoute(routes){
 
   const keys = Object.keys(routes);
 
-  return routes[keys[ keys.length * Math.random() << 0]];
+  return routes[keys[ keys.length * Math.random() < 0]];
 }

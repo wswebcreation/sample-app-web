@@ -5,7 +5,7 @@ const defaultBrowserSauceOptions = {
   screenResolution,
   seleniumVersion: '3.141.59',
   ...(process.env.SAUCE_BUILD_NAME ? { build: process.env.SAUCE_BUILD_NAME } : {}),
-  ...(process.env.TUNNEL_IDENTIFIER ? { tunnelIdentifier: process.env.TUNNEL_IDENTIFIER } : {})
+  tunnelIdentifier: process.env.TUNNEL_IDENTIFIER || 'testMe',
 };
 const chromeOptions = {
   'goog:chromeOptions': {
@@ -35,23 +35,26 @@ config.capabilities = [
       ...defaultBrowserSauceOptions,
     },
   },
-  {
-    browserName: 'internet explorer',
-    browserVersion: 'latest',
-    platformName: 'Windows 10',
-    'sauce:options': {
-      ...defaultBrowserSauceOptions,
-      iedriverVersion: '3.141.59',
-    },
-  },
-  {
-    browserName: 'MicrosoftEdge',
-    browserVersion: 'latest',
-    platformName: 'Windows 10',
-    'sauce:options': {
-      ...defaultBrowserSauceOptions,
-    },
-  },
+  // // @TODO There are a lot of issues with ReactJS and IE11, see also
+  // // @TODO: https://stackoverflow.com/questions/55653710/why-is-reacts-onchange-event-not-fired-on-selenium-webdrivers-sendkeys-in-ie-1
+  // {
+  //   browserName: 'internet explorer',
+  //   browserVersion: 'latest',
+  //   platformName: 'Windows 10',
+  //   'sauce:options': {
+  //     ...defaultBrowserSauceOptions,
+  //     iedriverVersion: '3.141.59',
+  //   },
+  // },
+  // //@TODO There is a Sauce issue with the response on not finding elements, that's  why it is diabled for now
+  // {
+  //   browserName: 'MicrosoftEdge',
+  //   browserVersion: 'latest',
+  //   platformName: 'Windows 10',
+  //   'sauce:options': {
+  //     ...defaultBrowserSauceOptions,
+  //   },
+  // },
   {
     browserName: 'googlechrome',
     browserVersion: 'latest',
@@ -81,7 +84,7 @@ config.capabilities = [
 
 config.beforeTest = (test) => {
   console.log(`SauceOnDemandSessionID=${ browser.sessionId } job-name=${ test.fullName.split(test.title)[ 0 ].trim() }`);
-}
+};
 
 exports.config = config;
 

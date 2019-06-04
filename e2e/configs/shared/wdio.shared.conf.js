@@ -1,3 +1,7 @@
+const os = require('os');
+
+const networkInterfaces = os.networkInterfaces();
+
 exports.config = {
   // ====================
   // Runner Configuration
@@ -14,7 +18,7 @@ exports.config = {
   // Test Configurations
   // ===================
   logLevel: 'silent',
-  baseUrl: 'http://localhost:5000/',
+  baseUrl: `http://${ getNetworkAddress() || 'localhost' }:5000/`,
   waitforTimeout: 15000,
   connectionRetryTimeout: 90000,
   connectionRetryCount: 3,
@@ -34,13 +38,13 @@ exports.config = {
   // ==================
   // Specify Suites
   // ==================
-  suites:{
-    all:[
+  suites: {
+    all: [
       './e2e/specs/all/*.spec.js',
     ],
-    optimized:[
+    optimized: [
       './e2e/specs/optimized/login.spec.js',
-      './e2e/specs/optimized/redirect.spec.js',
+      // './e2e/specs/optimized/redirect.spec.js',
     ],
   },
 
@@ -57,3 +61,14 @@ exports.config = {
     }
   },
 };
+
+function getNetworkAddress() {
+  for (const name of Object.keys(networkInterfaces)) {
+    for (const networkInterface of networkInterfaces[ name ]) {
+      const { address, family, internal } = networkInterface;
+      if (family === 'IPv4' && !internal) {
+        return address;
+      }
+    }
+  }
+}

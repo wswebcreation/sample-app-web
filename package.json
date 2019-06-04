@@ -21,7 +21,7 @@
   "browserslist": [
     ">0.2%",
     "not dead",
-    "not ie <= 11",
+    "not ie < 11",
     "not op_mini all"
   ],
   "repository": {
@@ -74,7 +74,6 @@
     "postcss-safe-parser": "4.0.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
-    "react-app-polyfill": "^0.2.2",
     "react-dev-utils": "^8.0.0",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
@@ -110,6 +109,7 @@
     "eslint-plugin-jest": "^22.6.4",
     "history": "^4.9.0",
     "husky": "^2.3.0",
+    "react-app-polyfill": "^0.2.2",
     "react-test-renderer": "^16.8.6",
     "serve": "^11.0.1"
   },
