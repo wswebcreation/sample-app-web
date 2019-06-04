@@ -16,6 +16,18 @@ pipeline {
             steps {
             	sh "npm run serve &"
             }
+            post {
+              always {
+                publishHTML target: [
+                  allowMissing         : false,
+                  alwaysLinkToLastBuild: false,
+                  keepAll             : true,
+                  reportDir            : '.coverage/lcov-report',
+                  reportFiles          : 'index.html',
+                  reportName           : 'Test Report'
+                ]
+              }
+            }
         }
         stage('Run Functional Tests') {
             steps {
