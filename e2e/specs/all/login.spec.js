@@ -75,18 +75,4 @@ describe('Login', () => {
       'The error message is not as expected',
     );
   });
-
-  it('should show the locked out message when the locked out credentials are used', () => {
-    // First check there is no error message
-    expect(LoginScreen.isErrorMessageDisplayed()).toEqual(false, 'Error message is shown');
-
-    // Login
-    LoginScreen.signIn(LOGIN_USERS.LOCKED);
-
-    expect(LoginScreen.isErrorMessageDisplayed()).toEqual(true, 'Error message is shown');
-    expect(LoginScreen.getErrorMessage()).toContain(
-      'Sorry, this user has been locked out.',
-      'The error message is not as expected',
-    );
-  });
 });
