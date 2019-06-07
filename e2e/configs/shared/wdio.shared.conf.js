@@ -54,7 +54,7 @@ exports.config = {
   before: () => {
     // Set the default screensize
     if (!browser.isMobile) {
-      browser.setWindowSize(1366, 768);
+      browser.setWindowRect(0, 0, 1366, 768);
     }
   },
 };
